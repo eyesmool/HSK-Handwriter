@@ -114,13 +114,11 @@ export const Quiz = ({ char, height, width, quizState, setQuizState, setGameStat
     };
 
     const handleClick = () => {
-        // Clear the timer if there's already one running (which means it's a double click)
         if (singleClickTimer.current) {
             clearTimeout(singleClickTimer.current);
             singleClickTimer.current = null;
             handleDoubleTap(); // Call double-click handler
         } else {
-            // Set a timer to detect if another click occurs shortly (double click)
             singleClickTimer.current = setTimeout(() => {
                 handleSingleTap(); // Call single-click handler
                 singleClickTimer.current = null;
@@ -129,20 +127,22 @@ export const Quiz = ({ char, height, width, quizState, setQuizState, setGameStat
     };
 
     const handleMouseDown = (e) => {
-        setStartPoint({ x: e.clientX, y: e.clientY });
+        const { clientX, clientY } = e.touches ? e.touches[0] : e; // Support for touch or mouse
+        setStartPoint({ x: clientX, y: clientY });
         setIsDragging(false);  // Reset dragging flag
     };
-    
+
     const handleMouseMove = (e) => {
+        const { clientX, clientY } = e.touches ? e.touches[0] : e;
         const distance = Math.sqrt(
-            Math.pow(e.clientX - startPoint.x, 2) + Math.pow(e.clientY - startPoint.y, 2)
+            Math.pow(clientX - startPoint.x, 2) + Math.pow(clientY - startPoint.y, 2)
         );
         if (distance > 5) { // If the mouse moves more than 5px, treat as dragging
             setIsDragging(true);
         }
     };
-    
-    const handleMouseUp = () => {
+
+    const handleMouseUp = (e) => {
         if (isDragging) {
             console.log("drag event");
             // Handle drag/draw event
@@ -150,7 +150,20 @@ export const Quiz = ({ char, height, width, quizState, setQuizState, setGameStat
             handleClick();  // Handle as a click if it's not a drag
         }
     };
-    
+
+    useEffect(() => {
+        const grid = document.getElementById('grid-background-target');
+        grid.addEventListener('touchstart', handleMouseDown);
+        grid.addEventListener('touchmove', handleMouseMove);
+        grid.addEventListener('touchend', handleMouseUp);
+
+        return () => {
+            grid.removeEventListener('touchstart', handleMouseDown);
+            grid.removeEventListener('touchmove', handleMouseMove);
+            grid.removeEventListener('touchend', handleMouseUp);
+        };
+    }, [startPoint, isDragging]);
+
     return (
         <div>
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +173,6 @@ export const Quiz = ({ char, height, width, quizState, setQuizState, setGameStat
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
-                // onClick={handleClick}
             >
                 <line x1="0" y1="0" x2={width} y2={height} stroke="#DDD" />
                 <line x1={width} y1="0" x2="0" y2={height} stroke="#DDD" />
