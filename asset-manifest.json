@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hectichanzi/static/css/main.e6c13ad2.css",
+    "main.js": "/hectichanzi/static/js/main.7b385569.js",
+    "static/js/453.0cb4b472.chunk.js": "/hectichanzi/static/js/453.0cb4b472.chunk.js",
+    "index.html": "/hectichanzi/index.html",
+    "main.e6c13ad2.css.map": "/hectichanzi/static/css/main.e6c13ad2.css.map",
+    "main.7b385569.js.map": "/hectichanzi/static/js/main.7b385569.js.map",
+    "453.0cb4b472.chunk.js.map": "/hectichanzi/static/js/453.0cb4b472.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.7b385569.js"
+  ]
+}
