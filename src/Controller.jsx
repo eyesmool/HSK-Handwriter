@@ -14,6 +14,7 @@ export const Controller = () => {
     const [charsDone, setCharsDone] = useState([]);
     const [newQuestion, setNewQuestion] = useState(false);
     const [writer, setWriter] = useState(null);
+    
 
 
     useEffect(() => {
