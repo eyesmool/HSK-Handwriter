@@ -11,11 +11,10 @@ const App = () => {
   };
 
   return (
-    <div> 
-      <Controller/>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}> 
+      <Controller />
     </div>
-  )
-  
+  );
 };
 
 export default App;
