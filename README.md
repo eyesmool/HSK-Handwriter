@@ -1,1 +1,1 @@
-![til](./demo.gif)
+![til](/demo_gif.gif)
