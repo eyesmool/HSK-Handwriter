@@ -7,7 +7,7 @@
 - Tap for a hint, double-tap for a walkthrough
 - Stroke recognition and automatic grading
 
-# Longer Demonstration
+# Longer Demonstration (might take a while to load)
 ![til](/demo_gif.gif)
 
 # Open Source Credits
